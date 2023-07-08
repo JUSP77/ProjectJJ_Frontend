@@ -1,19 +1,19 @@
 <template>
   <div class="container" v-if="isDataLoaded">
     <div class="row justify-content-center">
-      <div class="row">
+      <div class="col-4 ">
+        <p class="text-end" style="margin-bottom: 0;">{{questionIndex + 1}} / {{quizArray.length}}</p>
         <div class="progress">
-          <div class="progress-bar" role="progressbar"
-               :style="{width: ((questionIndex+1)/quizArray.length)*30 + '%'}"
+          <div class="progress-bar" role="progressbar" style="background-color: #CCE490"
+               :style="{width: ((questionIndex+1)/quizArray.length)*100 + '%'}"
                :aria-valuenow="((questionIndex+1)/quizArray.length)*100" aria-valuemin="0"
-               aria-valuemax="100">{{ ((questionIndex + 1) / quizArray.length) * 100 }}%
+               aria-valuemax="100">
           </div>
         </div>
       </div>
       <div class="row">
         <h1> Quiz {{ questionIndex + 1 }} </h1>
-        <h1>{{ ((questionIndex + 1) / quizArray.length) * 100 }}%</h1>
-        <p v-if="isQuizPage"> {{ quizArray[questionIndex].hint }}</p>
+        <p v-if="isQuizPage"> 힌트 : {{ quizArray[questionIndex].hint }}</p>
         <p v-else>{{ quizArray[questionIndex].explanation }}</p>
       </div>
       <div class="row">
@@ -91,20 +91,22 @@ export default {
     },
     selectAnswer(selectedAnswer) {
       // 서버로 보낼 정답 여부를 저장하는 변수 선언
-      let result = null;
-      let no = this.questionIndex + 1;
+      let userAnswer = null;
+      let quizNo = this.questionIndex + 1;
       if (selectedAnswer === this.quizArray[this.questionIndex].correctAnswer) {
-        result = "O";
+        userAnswer = "O";
       } else {
-        result = "X";
+        userAnswer = "X";
       }
       this.correctAnswer = this.quizArray[this.questionIndex].correctAnswer;
       this.isQuizPage = false;
+
+      const formData = new FormData();
+      formData.append('no', quizNo);
+      formData.append('answer', userAnswer);
+
       this.$axios
-          .post('http://localhost:8081/score', {
-            no: no,
-            result: result,
-          })
+          .post('http://localhost:8081/rest/userAnswer', formData)
           .then(res => {
             console.log(res)
           })
