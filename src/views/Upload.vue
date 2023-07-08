@@ -74,7 +74,6 @@ export default {
       this.$axios.post('http://localhost:8081/upload', formData)
           .then(res => {
             console.log(res);
-            console.log(this.hint);
           })
           .catch(err => {
             console.log(err);
