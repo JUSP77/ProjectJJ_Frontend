@@ -1,11 +1,21 @@
 <template>
   <div class="container" v-if="isDataLoaded">
-    <div class="row">
-      <h1> Quiz {{ questionIndex + 1 }} </h1>
-      <p v-if="isQuizPage"> {{ quizArray[questionIndex].hint }}</p>
-      <p v-else>{{ quizArray[questionIndex].explanation }}</p>
-    </div>
-    <div class="row">
+    <div class="row justify-content-center">
+      <div class="row">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"
+               :style="{width: ((questionIndex+1)/quizArray.length)*30 + '%'}"
+               :aria-valuenow="((questionIndex+1)/quizArray.length)*100" aria-valuemin="0"
+               aria-valuemax="100">{{ ((questionIndex + 1) / quizArray.length) * 100 }}%
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h1> Quiz {{ questionIndex + 1 }} </h1>
+        <h1>{{ ((questionIndex + 1) / quizArray.length) * 100 }}%</h1>
+        <p v-if="isQuizPage"> {{ quizArray[questionIndex].hint }}</p>
+        <p v-else>{{ quizArray[questionIndex].explanation }}</p>
+      </div>
       <div class="row">
         <div class="row">
           <div class="col main1" :class="{ lowOpacity: correctAnswer === 'B'}">
@@ -47,6 +57,7 @@ export default {
       isQuizPage: true,
       correctAnswer: '',
       isDataLoaded: false,
+      progressPercentage: 0,
     }
   },
   components: {},
@@ -82,7 +93,7 @@ export default {
       // 서버로 보낼 정답 여부를 저장하는 변수 선언
       let result = null;
       let no = this.questionIndex + 1;
-      if (selectedAnswer === this.quizArray[this.questionIndex]) {
+      if (selectedAnswer === this.quizArray[this.questionIndex].correctAnswer) {
         result = "O";
       } else {
         result = "X";
@@ -112,7 +123,7 @@ export default {
       } else {
         this.$router.replace("/result");
       }
-    },
+    }
   },
   watch: {},
 }
@@ -131,5 +142,7 @@ export default {
   opacity: 0.4;
 }
 
-
+.progress-bar{
+  width: 50%;
+}
 </style>
