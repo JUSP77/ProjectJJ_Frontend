@@ -1,6 +1,6 @@
 <template>
   <footer class="mt-auto text-white-50">
-    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+    <p style="color: #F2F4B2">Made by : Project JJ</p>
   </footer>
 </template>
 
@@ -11,5 +11,13 @@ export default {
 </script>
 
 <style scoped>
-
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+}
 </style>

@@ -1,5 +1,10 @@
 <template>
-  <div class="container" v-if="isDataLoaded">
+  <div v-if="!isDataLoaded" class="container text-center spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">로딩 중...</span>
+    </div>
+  </div>
+  <div class="container" v-else>
     <div class="row justify-content-center">
       <div class="col-4 ">
         <p class="text-end" style="margin-bottom: 0;">{{questionIndex + 1}} / {{quizArray.length}}</p>
@@ -39,12 +44,6 @@
       </div>
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-
 </template>
 
 <script>
@@ -57,7 +56,7 @@ export default {
       isQuizPage: true,
       correctAnswer: '',
       isDataLoaded: false,
-      progressPercentage: 0,
+      progressPercentage: 0
     }
   },
   components: {},
@@ -68,9 +67,11 @@ export default {
 
   methods: {
     getAllQuiz() {
+      this.isLoading = true;
       this.$axios.get('http://localhost:8081/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
+
 
             for (let i = 0; i < quizData.length; i++) {
               const quiz = {
@@ -87,7 +88,7 @@ export default {
           })
           .catch(err => {
             console.log(err);
-          });
+          })
     },
     selectAnswer(selectedAnswer) {
       // 서버로 보낼 정답 여부를 저장하는 변수 선언
@@ -134,6 +135,10 @@ export default {
 
 <style scoped>
 
+.container {
+  min-height: 88.5vh;
+}
+
 .main1,
 .main2 {
   opacity: 1;
@@ -146,5 +151,11 @@ export default {
 
 .progress-bar{
   width: 50%;
+}
+.spinner-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
 }
 </style>
