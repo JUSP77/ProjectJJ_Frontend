@@ -1,15 +1,16 @@
 <template>
-  <h1> 결과발표</h1>
+  <div class="container">
+    <h1> 결과발표</h1>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 
 </script>
 
-<style>
-
-
+<style scoped>
+.container {
+  min-height: 88.5vh;
+}
 </style>
