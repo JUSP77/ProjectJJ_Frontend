@@ -1,6 +1,6 @@
 <template>
-  <footer class="mt-auto text-white-50">
-    <p style="color: #F2F4B2">Made by : Project JJ</p>
+  <footer class="mt-auto">
+    <p>Made by : Project JJ</p>
   </footer>
 </template>
 
@@ -16,7 +16,6 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #333;
   padding: 10px;
   text-align: center;
 }
