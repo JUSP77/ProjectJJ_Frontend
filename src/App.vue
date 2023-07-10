@@ -27,8 +27,7 @@ export default {
 
 <style>
 #body{
-  background-color: #0D627A;
-  color: #F2F4B2;
+  background-color: white;
 }
 .bd-placeholder-img {
   font-size: 1.125rem;

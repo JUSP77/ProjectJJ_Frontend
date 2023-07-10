@@ -21,17 +21,15 @@
         <p v-if="isQuizPage"> 힌트 : {{ quizArray[questionIndex].hint }}</p>
         <p v-else>{{ quizArray[questionIndex].explanation }}</p>
       </div>
-      <div class="row">
-        <div class="row">
-          <div class="col main1" :class="{ lowOpacity: correctAnswer === 'B'}">
-            <img src="./../assets/A.png" @click="selectAnswer('B')">
-            <br>
+      <div class="row py-4 px-1 rounded" style="background-color: lightgray">
+        <div class="row justify-content-center">
+          <div class="col-6 col-md-6 main1" :class="{ lowOpacity: correctAnswer === 'B'}">
+            <img src="./../assets/A.png" @click="selectAnswer('B')" class="d-block mx-auto" style="margin-bottom: 26px;">
             <img :src="quizArray[questionIndex].imageA" @click="selectAnswer('A')"/>
             <br>
           </div>
-          <div class="col main2" :class="{ lowOpacity: correctAnswer === 'A'}">
-            <img src="./../assets/B.png" @click="selectAnswer('B')"/>
-            <br>
+          <div class="col-6 col-md-6 main2" :class="{ lowOpacity: correctAnswer === 'A'}">
+            <img src="./../assets/B.png" @click="selectAnswer('B')" class="d-block mx-auto" style="margin-bottom: 26px;">
             <img :src="quizArray[questionIndex].imageB" @click="selectAnswer('B')"/>
           </div>
         </div>
@@ -108,9 +106,6 @@ export default {
 
       this.$axios
           .post('http://localhost:8081/rest/userAnswer', formData)
-          .then(res => {
-            console.log(res)
-          })
           .catch(err => {
             console.log(err)
           })

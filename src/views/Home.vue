@@ -4,9 +4,8 @@
       <button class="btn btn-primary" @click="goPage">회원가입</button>
       <a href="/upload">업로드</a>
       <br>
-      <h1>UX 라이팅 퀴즈</h1>
+      <h1><strong>UX 라이팅 퀴즈</strong></h1>
       <br>
-      <p> 내 라이팅 실력은 ?</p>
       <img src="./../assets/home.png">
       <div v-if="isLoading" class="text-center">
         <div class="spinner-border" role="status">
