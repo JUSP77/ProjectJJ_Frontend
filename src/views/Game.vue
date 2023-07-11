@@ -7,7 +7,7 @@
   <div class="container" v-else>
     <div class="row justify-content-center">
       <div class="col-4 ">
-        <p class="text-end" style="margin-bottom: 0;">{{questionIndex + 1}} / {{quizArray.length}}</p>
+        <p class="text-end" style="margin-bottom: 0;">{{ questionIndex + 1 }} / {{ quizArray.length }}</p>
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="background-color: #CCE490"
                :style="{width: ((questionIndex+1)/quizArray.length)*100 + '%'}"
@@ -24,12 +24,14 @@
       <div class="row py-4 px-1 rounded" style="background-color: lightgray">
         <div class="row justify-content-center">
           <div class="col-6 col-md-6 main1" :class="{ lowOpacity: correctAnswer === 'B'}">
-            <img src="./../assets/A.png" @click="selectAnswer('B')" class="d-block mx-auto" style="margin-bottom: 26px;">
+            <img src="./../assets/A.png" @click="selectAnswer('B')" class="d-block mx-auto"
+                 style="margin-bottom: 26px;">
             <img :src="quizArray[questionIndex].imageA" @click="selectAnswer('A')"/>
             <br>
           </div>
           <div class="col-6 col-md-6 main2" :class="{ lowOpacity: correctAnswer === 'A'}">
-            <img src="./../assets/B.png" @click="selectAnswer('B')" class="d-block mx-auto" style="margin-bottom: 26px;">
+            <img src="./../assets/B.png" @click="selectAnswer('B')" class="d-block mx-auto"
+                 style="margin-bottom: 26px;">
             <img :src="quizArray[questionIndex].imageB" @click="selectAnswer('B')"/>
           </div>
         </div>
@@ -54,7 +56,8 @@ export default {
       isQuizPage: true,
       correctAnswer: '',
       isDataLoaded: false,
-      progressPercentage: 0
+      progressPercentage: 0,
+      userId: null,
     }
   },
   components: {},
@@ -66,6 +69,8 @@ export default {
   methods: {
     getAllQuiz() {
       this.isLoading = true;
+      const timestamp = Date.now();
+      this.userId = 'session-' + timestamp;
       this.$axios.get('http://localhost:8081/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
@@ -103,14 +108,12 @@ export default {
       const formData = new FormData();
       formData.append('no', quizNo);
       formData.append('answer', userAnswer);
+      formData.append('userId', this.userId);
 
       this.$axios
           .post('http://localhost:8081/rest/userAnswer', formData)
           .catch(err => {
             console.log(err)
-          })
-          .then(() => {
-
           })
     },
     nextRound() {
@@ -119,7 +122,7 @@ export default {
         this.isQuizPage = true;
         this.correctAnswer = '';
       } else {
-        this.$router.replace("/result");
+        this.$router.replace({path: '/result', query: {userId: this.userId}});
       }
     }
   },
@@ -144,10 +147,11 @@ export default {
   opacity: 0.4;
 }
 
-.progress-bar{
+.progress-bar {
   width: 50%;
 }
-.spinner-container{
+
+.spinner-container {
   display: flex;
   align-items: center;
   justify-content: center;
