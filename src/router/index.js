@@ -4,6 +4,7 @@ import Result from "@/views/Result";
 import Game from "@/views/Game";
 import RegisterForm from "@/views/registerForm"
 import upload from "@/views/Upload";
+import test from "@/views/Test";
 
 const routes = [
     {
@@ -31,7 +32,14 @@ const routes = [
         path: "/upload",
         name: "Upload",
         component: upload
-    }
+    },
+    {
+        path: "/test",
+        name: "Test",
+        component: test
+    },
+
+
 ]
 
 const router = createRouter({

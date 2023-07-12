@@ -13,7 +13,8 @@
         </div>
       </div>
       <p v-else>현재 총 {{ count }} 명이 참여했습니다.</p>
-      <img src="./../assets/startButton.png" @click="startButton">
+      <img v-bind:class="{lowOpacity: hoverNextButton }" src="./../assets/startButton.png" @click="startButton"
+           @mouseover="hoverButton()" @mouseleave="hoverButton()">
     </div>
   </div>
 </template>
@@ -23,12 +24,11 @@
 
 export default {
   name: "Home",
-
   data() {
     return {
       count: 0,
       isLoading: false,
-
+      hoverNextButton: false,
     }
   },
 
@@ -48,14 +48,16 @@ export default {
           .finally(() => {
             this.isLoading = false;
           });
-
     },
     goPage() {
       this.$router.push("/registerForm")
     },
     startButton() {
       this.$router.push("/game")
-    }
+    },
+    hoverButton() {
+      this.hoverNextButton = !this.hoverNextButton;
+    },
   }
 }
 
@@ -65,5 +67,9 @@ export default {
 
 .container {
   min-height: 88.5vh;
+}
+
+.lowOpacity {
+  opacity: 0.4;
 }
 </style>
