@@ -69,7 +69,9 @@ export default {
   data() {
     return {
       quizArray: [],
+      quizAnswers: [],
       questionIndex: 0,
+      countAllQuiz: 0,
       isQuizPage: true,
       correctAnswer: '',
       isDataLoaded: false,
@@ -80,7 +82,6 @@ export default {
       isBorderA: false,
       isBorderB: false,
       hoverNextButton: false,
-      showP: false,
     }
   },
   components: {},
@@ -97,10 +98,10 @@ export default {
       this.$axios.get('http://localhost:8081/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
+            this.countAllQuiz = quizData.length;
             console.log(this.userId)
 
-
-            for (let i = 0; i < quizData.length; i++) {
+            for (let i = 0; i < this.countAllQuiz; i++) {
               const quiz = {
                 no: quizData[i].no,
                 hint: quizData[i].hint,
@@ -127,29 +128,28 @@ export default {
         userAnswer = "X";
       }
       this.correctAnswer = this.quizArray[this.questionIndex].correctAnswer;
-
       this.isClickHint = true;
       this.hoverNextButton = false;
 
       if (this.isQuizPage) {
-
-        const formData = new FormData();
-        formData.append('no', quizNo);
-        formData.append('answer', userAnswer);
-        formData.append('userId', this.userId);
-        console.log(formData.get('answer'));
-
-        this.$axios
-            .post('http://localhost:8081/rest/userAnswer', formData)
-            .then(res => {
-              if (this.questionIndex + 1 === 10) {
-                this.countCorrectAnswer = res.data.item[0];
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
+        const answer = {
+          quizNo: quizNo,
+          userAnswer: userAnswer,
+          userId: this.userId
+        };
+        this.quizAnswers.push(answer);
         this.isQuizPage = false;
+
+        if (this.questionIndex + 1 === this.countAllQuiz) {
+          this.$axios
+              .post('http://localhost:8081/rest/userAnswer', this.quizAnswers)
+              .then(res => {
+                this.countCorrectAnswer = res.data.data;
+              })
+              .catch(err => {
+                console.log(err)
+              })
+        }
       }
     },
     nextRound() {

@@ -22,6 +22,7 @@ export default {
     getResultPage() {
       const userId = this.$route.query.userId;
       this.countCorrectAnswer = this.$route.query.countCorrectAnswer;
+      console.log(userId, this.countCorrectAnswer)
 
       this.$axios
           .get("http://localhost:8081/result", {
