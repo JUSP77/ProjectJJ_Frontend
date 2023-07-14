@@ -53,7 +53,7 @@ export default {
 
     const submit = () => {
 
-      this.$axios.post("http://localhost:8081/rest/member/register",
+      this.$axios.post("http://localhost:8080/rest/member/register",
           {
             id: this.form.id,
             password: this.form.password

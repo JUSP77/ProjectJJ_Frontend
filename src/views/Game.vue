@@ -95,7 +95,7 @@ export default {
       this.isLoading = true;
       const timestamp = Date.now();
       this.userId = 'session-' + timestamp;
-      this.$axios.get('http://localhost:8081/rest/getQuiz')
+      this.$axios.get('http://projectjj-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
             this.countAllQuiz = quizData.length;
@@ -142,7 +142,7 @@ export default {
 
         if (this.questionIndex + 1 === this.countAllQuiz) {
           this.$axios
-              .post('http://localhost:8081/rest/userAnswer', this.quizAnswers)
+              .post('http://projectjj-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/userAnswer', this.quizAnswers)
               .then(res => {
                 this.countCorrectAnswer = res.data.data;
               })
