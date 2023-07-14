@@ -71,7 +71,7 @@ export default {
       formData.append('hint', this.hint);
       formData.append('explanation', this.explanation);
 
-      this.$axios.post('http://localhost:8081/upload', formData)
+      this.$axios.post('http://localhost:8080/upload', formData)
           .then(res => {
             console.log(res);
           })
