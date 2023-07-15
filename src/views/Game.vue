@@ -95,7 +95,7 @@ export default {
       this.isLoading = true;
       const timestamp = Date.now();
       this.userId = 'session-' + timestamp;
-      this.$axios.get('http://projectjj-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getQuiz')
+      this.$axios.get('http://ProjectJJ-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
             this.countAllQuiz = quizData.length;
@@ -135,14 +135,14 @@ export default {
         const answer = {
           quizNo: quizNo,
           userAnswer: userAnswer,
-          userId: this.userId
+          userId: this.userId,
         };
         this.quizAnswers.push(answer);
         this.isQuizPage = false;
 
         if (this.questionIndex + 1 === this.countAllQuiz) {
           this.$axios
-              .post('http://projectjj-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/userAnswer', this.quizAnswers)
+              .post('http://ProjectJJ-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/userAnswer', this.quizAnswers)
               .then(res => {
                 this.countCorrectAnswer = res.data.data;
               })

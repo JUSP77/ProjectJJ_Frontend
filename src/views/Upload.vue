@@ -71,7 +71,7 @@ export default {
       formData.append('hint', this.hint);
       formData.append('explanation', this.explanation);
 
-      this.$axios.post('http://localhost:8080/upload', formData)
+      this.$axios.post('http://ProjectJJ-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/upload', formData)
           .then(res => {
             console.log(res);
           })
