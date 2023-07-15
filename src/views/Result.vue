@@ -25,7 +25,7 @@ export default {
       console.log(userId, this.countCorrectAnswer)
 
       this.$axios
-          .get("http://project-jj-env.eba-hes82kuf.ap-northeast-1.elasticbeanstalk.com/result", {
+          .get("https://projectjj.shop/result", {
             params:{
               userId: userId,
               countCorrectAnswer: this.countCorrectAnswer,
