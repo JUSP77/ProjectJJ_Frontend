@@ -37,7 +37,7 @@ export default {
   methods: {
     getCount() {
       this.isLoading = true;
-      this.$axios.get('http://ProjectJJ-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getCount')
+      this.$axios.get('http://project-jj-env.eba-hes82kuf.ap-northeast-1.elasticbeanstalk.com/rest/getCount')
           .then(res => {
             this.count = res.data.count;
           })
