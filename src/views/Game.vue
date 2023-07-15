@@ -95,7 +95,7 @@ export default {
       this.isLoading = true;
       const timestamp = Date.now();
       this.userId = 'session-' + timestamp;
-      this.$axios.get('http://project-jj-env.eba-hes82kuf.ap-northeast-1.elasticbeanstalk.com/rest/getQuiz')
+      this.$axios.get('https://projectjj.shop/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
             this.countAllQuiz = quizData.length;
