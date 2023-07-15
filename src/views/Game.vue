@@ -142,7 +142,7 @@ export default {
 
         if (this.questionIndex + 1 === this.countAllQuiz) {
           this.$axios
-              .post('http://project-jj-env.eba-hes82kuf.ap-northeast-1.elasticbeanstalk.com/rest/userAnswer', this.quizAnswers)
+              .post('https://projectjj.shop/rest/userAnswer', this.quizAnswers)
               .then(res => {
                 this.countCorrectAnswer = res.data.data;
               })
