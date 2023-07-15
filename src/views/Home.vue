@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="px-3">
-      <button class="btn btn-primary" @click="goPage">회원가입</button>
       <a href="/upload">업로드</a>
       <br>
       <h1><strong>UX 라이팅 퀴즈</strong></h1>
@@ -38,7 +37,7 @@ export default {
   methods: {
     getCount() {
       this.isLoading = true;
-      this.$axios.get('http://projectjj-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getCount')
+      this.$axios.get('http://ProjectJJ-env.eba-qd8nmdmx.ap-northeast-2.elasticbeanstalk.com/rest/getCount')
           .then(res => {
             this.count = res.data.count;
           })
@@ -48,9 +47,6 @@ export default {
           .finally(() => {
             this.isLoading = false;
           });
-    },
-    goPage() {
-      this.$router.push("/registerForm")
     },
     startButton() {
       this.$router.push("/game")
