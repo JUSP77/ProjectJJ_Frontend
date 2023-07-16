@@ -1,4 +1,5 @@
 # frontend
+netlify : https://projectjj.netlify.app/
 
 ## Project setup
 ```
