@@ -43,7 +43,7 @@ export default {
   methods: {
     getCount() {
       this.isLoading = true;
-      this.$axios.get('http://localhost:5000/rest/getCount')
+      this.$axios.get('https://projectjj.shop/rest/getCount')
           .then(res => {
             this.count = res.data.count;
           })

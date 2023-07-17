@@ -104,7 +104,7 @@ export default {
       this.isLoading = true;
       const timestamp = Date.now();
       this.userId = 'session-' + timestamp;
-      this.$axios.get('http://localhost:5000/rest/getQuiz')
+      this.$axios.get('https://projectjj.shop/rest/getQuiz')
           .then(res => {
             const quizData = res.data.item;
             console.log(quizData)
@@ -152,7 +152,7 @@ export default {
 
         if (this.questionIndex + 1 === this.countAllQuiz) {
           this.$axios
-              .post('http://localhost:5000/rest/userAnswer', this.quizAnswers)
+              .post('https://projectjj.shop/rest/userAnswer', this.quizAnswers)
               .then(res => {
                 this.countCorrectAnswer = res.data.data;
               })
