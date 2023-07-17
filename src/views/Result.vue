@@ -14,7 +14,6 @@
       <div class="row justify-content-center">
         <img class="img-fluid" style="max-width: 251px; height: auto" src="../assets/backToHome.png" @click="goHome()">
       </div>
-
     </div>
   </div>
 </template>
@@ -34,6 +33,7 @@ export default {
   },
   methods: {
     getResultPage() {
+      this.isDataLoaded = true;
       const userId = this.$route.query.userId;
       this.countCorrectAnswer = this.$route.query.countCorrectAnswer;
       console.log(userId, this.countCorrectAnswer)
@@ -47,9 +47,6 @@ export default {
           })
           .then(res => {
             console.log(res);
-            this.result = {
-              url: res.data.result.url
-            }
           })
           .catch(err => {
             console.log(err);
@@ -80,6 +77,7 @@ export default {
   color: #fff; /* 글씨 색상 설정 */
   padding: 8px; /* 내부 여백 설정 */
 }
+
 .thanks {
   color: black;
   font-family: Pretendard;
@@ -100,6 +98,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .point {
   display: inline;
   margin: 4px;
