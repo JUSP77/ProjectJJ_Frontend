@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div v-if="!isDataLoaded" class="row justify-content-center align-items-center">
         <div class="text-center">
           <div class="spinner-container">
@@ -181,7 +181,7 @@ export default {
 
       } else {
         this.isDataLoaded = false; // 스피너 표시
-        await this.delay(3000);
+        await this.delay(5500);
         this.isDataLoaded = true;
 
         try {
