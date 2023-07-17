@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="row">
-        <div v-if="!isDataLoaded" class="spinner-container">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">로딩 중...</span>
+      <div v-if="!isDataLoaded" class="row justify-content-center align-items-center">
+        <div class="text-center">
+          <div class="spinner-container">
+            <div class="spinner-border spinner-custom" role="status"></div>
+            <p class="spinner-font">결과 도출 중입니다.</p>
           </div>
         </div>
       </div>
@@ -29,7 +30,8 @@
         <!-- 글씨 부분 -->
         <div class="row my-1 justify-content-center" style="height: 100px">
           <p class="quizNo"> Quiz {{ questionIndex + 1 }} </p>
-          <img class="img-fluid my-1" v-if="!isClickHint" src="../assets/hintButton.png" style="width: 137px; height: 40px"
+          <img class="img-fluid my-1" v-if="!isClickHint" src="../assets/hintButton.png"
+               style="width: 137px; height: 40px"
                @click="clickHint()">
           <p class="hint" v-if="isQuizPage && isClickHint"> 힌트 : {{ quizArray[questionIndex].hint }}</p>
           <p class="explanation" v-if="!isQuizPage">{{
@@ -39,7 +41,8 @@
 
         <!-- 퀴즈 부분 -->
         <div class="row justify-content-center my-2">
-          <div class="col-6 main1 col-md-3" :class="{ lowOpacity: correctAnswer === 'B'}" style="background-color: lightgray; border-radius: 25px 0 0 25px">
+          <div class="col-6 main1 col-md-3" :class="{ lowOpacity: correctAnswer === 'B'}"
+               style="background-color: lightgray; border-radius: 25px 0 0 25px">
             <img class="img-fluid my-3 initial-quiz" v-bind:class="{ viewBorder : isBorderA }"
                  src="./../assets/A.png"
                  @click="selectAnswer('B')"
@@ -50,7 +53,8 @@
                  @click="selectAnswer('A')"
                  @mouseover="viewBorder('A')" @mouseleave="viewBorder('A')" style="margin-bottom: 11px"/>
           </div>
-          <div class="col-6 main2 col-md-3" :class="{ lowOpacity: correctAnswer === 'A'}" style="background-color: lightgray; border-radius: 0 25px 25px 0">
+          <div class="col-6 main2 col-md-3" :class="{ lowOpacity: correctAnswer === 'A'}"
+               style="background-color: lightgray; border-radius: 0 25px 25px 0">
             <img class="img-fluid my-3 initial-quiz" v-bind:class="{ viewBorder : isBorderB }"
                  src="./../assets/B.png"
                  @click="selectAnswer('B')"
@@ -155,6 +159,7 @@ export default {
               .post('https://projectjj.shop/rest/userAnswer', this.quizAnswers)
               .then(res => {
                 this.countCorrectAnswer = res.data.data;
+                console.log(this.countCorrectAnswer)
               })
               .catch(err => {
                 console.log(err)
@@ -162,7 +167,7 @@ export default {
         }
       }
     },
-    nextRound() {
+    async nextRound() {
       if (this.questionIndex < this.quizArray.length - 1) {
         this.questionIndex++;
         this.isQuizPage = true;
@@ -170,11 +175,20 @@ export default {
         this.isClickHint = false;
         this.isBorderA = false;
         this.isBorderB = false;
+
       } else {
-        this.$router.replace({
-          path: '/result',
-          query: {userId: this.userId, countCorrectAnswer: this.countCorrectAnswer}
-        });
+        this.isDataLoaded = false; // 스피너 표시
+        await this.delay(3000);
+        this.isDataLoaded = true;
+
+        try {
+          await this.$router.push({
+            path: '/result',
+            query: {userId: this.userId, countCorrectAnswer: this.countCorrectAnswer}
+          });
+        } catch (error) {
+          console.log(error)
+        }
       }
     },
     clickHint() {
@@ -193,6 +207,9 @@ export default {
     hoverButton() {
       this.hoverNextButton = !this.hoverNextButton;
     },
+    delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
   },
   watch: {},
 }
@@ -216,10 +233,10 @@ export default {
 }
 
 .spinner-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .viewBorder {
@@ -249,6 +266,7 @@ export default {
   width: auto;
   height: auto;
 }
+
 .hint {
   color: black;
   text-align: center;
@@ -268,6 +286,7 @@ export default {
   font-weight: 400;
   line-height: normal;
 }
+
 .quizNo {
   color: black;
   font-family: Pretendard;
@@ -276,16 +295,32 @@ export default {
   font-weight: 700;
   line-height: normal;
 }
+
 @media (max-width: 992px) {
   .main1,
   .main2 {
     margin-top: 40px;
   }
 }
+
 @media (max-width: 450px) {
   .main1,
   .main2 {
     margin-top: 50px;
   }
+}
+.spinner-custom {
+  width: 130px;
+  height: 130px;
+  border-width: 15px;
+  color: #3182F7;
+}
+.spinner-font {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 </style>

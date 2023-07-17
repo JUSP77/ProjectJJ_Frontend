@@ -1,16 +1,18 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-6 col-md-3">
-        <img class="img-fluid" src="../assets/1_IMG_A.png" />
-      </div>
-      <div class="col-6 col-md-3">
-        <!-- 컬럼 2의 내용 -->
-        <img class="img-fluid" src="../assets/1_IMG_B.png" />
+      <div v-if="!isDataLoaded" class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="text-center">
+          <div class="spinner-container">
+            <div class="spinner-border spinner-custom" role="status"></div>
+              <p class="spinner-font">결과 도출 중입니다.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -41,5 +43,19 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+.spinner-custom {
+  width: 130px;
+  height: 130px;
+  border-width: 15px;
+  color: #3182F7;
+}
+.spinner-font {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 </style>
