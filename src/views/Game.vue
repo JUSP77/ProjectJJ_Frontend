@@ -5,7 +5,8 @@
         <div class="text-center">
           <div class="spinner-container">
             <div class="spinner-border spinner-custom" role="status"></div>
-            <p class="spinner-font">결과 도출 중입니다.</p>
+            <p v-if="whichSpinner='loading'" class="spinner-font">결과 도출 중입니다.</p>
+            <p v-else class="spinner-font"> loading </p>
           </div>
         </div>
       </div>
@@ -95,6 +96,7 @@ export default {
       isBorderA: false,
       isBorderB: false,
       hoverNextButton: false,
+      whichSpinner: 'loading',
     }
   },
   components: {},
@@ -175,6 +177,7 @@ export default {
         this.isClickHint = false;
         this.isBorderA = false;
         this.isBorderB = false;
+        this.whichSpinner = 'showResult';
 
       } else {
         this.isDataLoaded = false; // 스피너 표시
