@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-auto">
+  <footer class="footer py-3 sticky-footer">
     <p>Made by : Project JJ</p>
   </footer>
 </template>

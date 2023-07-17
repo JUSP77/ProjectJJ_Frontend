@@ -1,19 +1,30 @@
 <template>
   <div class="container">
-    <div class="px-3">
-      <a href="/upload">업로드</a>
+    <div class="row">
+      <div class="row px-3">
+        <a href="/upload">업로드</a>
+      </div>
       <br>
-      <h1><strong>UX 라이팅 퀴즈</strong></h1>
-      <br>
-      <img src="./../assets/home.png">
-      <div v-if="isLoading" class="text-center">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">로딩 중...</span>
+      <div class="row">
+        <h1><strong>UX 라이팅 퀴즈</strong></h1>
+      </div>
+      <div class="row justify-content-center">
+        <img class="img-fluid initial-size" src="./../assets/home.png">
+      </div>
+      <div v-if="isLoading" class="row">
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">로딩 중...</span>
+          </div>
         </div>
       </div>
-      <p v-else>현재 총 {{ count }} 명이 참여했습니다.</p>
-      <img v-bind:class="{lowOpacity: hoverNextButton }" src="./../assets/startButton.png" @click="startButton"
-           @mouseover="hoverButton()" @mouseleave="hoverButton()">
+      <div class="row v-else">
+        <p>현재 총 {{ count }} 명이 참여했습니다.</p>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <img class="img-fluid initial-button" v-bind:class="{lowOpacity: hoverNextButton }" src="./../assets/startButton.png" @click="startButton"
+             @mouseover="hoverButton()" @mouseleave="hoverButton()">
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +48,7 @@ export default {
   methods: {
     getCount() {
       this.isLoading = true;
-      this.$axios.get('https://projectjj.shop/rest/getCount')
+      this.$axios.get('http://localhost:5000/rest/getCount')
           .then(res => {
             this.count = res.data.count;
           })
@@ -67,5 +78,14 @@ export default {
 
 .lowOpacity {
   opacity: 0.4;
+}
+
+.initial-size {
+  max-width: 656px;
+  height: auto;
+}
+.initial-button {
+  max-width: 275px;
+  height: auto;
 }
 </style>

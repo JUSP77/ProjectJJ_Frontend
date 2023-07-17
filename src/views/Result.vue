@@ -25,7 +25,7 @@ export default {
       console.log(userId, this.countCorrectAnswer)
 
       this.$axios
-          .get("https://projectjj.shop/result", {
+          .get("http://localhost:5000/result", {
             params:{
               userId: userId,
               countCorrectAnswer: this.countCorrectAnswer,

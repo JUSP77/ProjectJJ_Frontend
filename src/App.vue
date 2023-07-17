@@ -2,7 +2,6 @@
   <body class="d-flex h-100 text-center" id="body">
 
   <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <Header/>
     <RouterView/>
     <Footer/>
   </div>
@@ -13,14 +12,12 @@
 
 <script>
 
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default {
   name: 'App',
   components: {
     Footer,
-    Header
   }
 }
 </script>
