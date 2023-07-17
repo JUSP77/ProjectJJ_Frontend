@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="row v-else" style="margin-top: 60px">
+      <div class="row v-else" style="margin-top: 40px">
         <p class="userCount">총<span style="color: #3182F7">{{ count }}</span>명이 참여했습니다.</p>
       </div>
       <div class="row d-flex justify-content-center">
@@ -66,10 +66,6 @@ export default {
 </script>
 
 <style scoped>
-
-.container {
-  min-height: 88.5vh;
-}
 
 .lowOpacity {
   opacity: 0.4;
