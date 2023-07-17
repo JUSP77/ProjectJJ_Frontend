@@ -10,14 +10,14 @@
       </div>
       <!-- 시작  -->
 
-      <div class="row my-3 justify-content-center" v-if="isDataLoaded">
+      <div class="row my-2 justify-content-center" v-if="isDataLoaded">
         <!--progress bar -->
         <div class="row justify-content-center">
           <div class="col-4 ">
             <p class="text-end" style="font-size: 15px; margin-bottom: 0; color: #3182F7">
               <strong>{{ questionIndex + 1 }} / {{ quizArray.length }}</strong></p>
             <div class="progress" style="height: 10px;">
-              <div class="progress-bar" role="progressbar" style="background-color: #3182F7"
+              <div class="progress-bar" role="progressbar" style="background-color: #3182F7; border-radius: 10px;"
                    :style="{width: ((questionIndex+1)/quizArray.length)*100 + '%'}"
                    :aria-valuenow="((questionIndex+1)/quizArray.length)*100" aria-valuemin="0"
                    aria-valuemax="100">
@@ -27,12 +27,12 @@
         </div>
 
         <!-- 글씨 부분 -->
-        <div class="row my-3 justify-content-center">
-          <h1> Quiz {{ questionIndex + 1 }} </h1>
-          <img class="img-fluid my-2" v-if="!isClickHint" src="../assets/hintButton.png" style="width: 137px; height: 40px"
+        <div class="row my-1 justify-content-center" style="height: 100px">
+          <p class="quizNo"> Quiz {{ questionIndex + 1 }} </p>
+          <img class="img-fluid my-1" v-if="!isClickHint" src="../assets/hintButton.png" style="width: 137px; height: 40px"
                @click="clickHint()">
-          <p v-if="isQuizPage && isClickHint" style="font-family:'나눔 고딕'; height: 40px"> 힌트 : {{ quizArray[questionIndex].hint }}</p>
-          <p v-if="!isQuizPage" style="font-family:'맑은 고딕';height: 40px; color: #3182F7">{{
+          <p class="hint" v-if="isQuizPage && isClickHint"> 힌트 : {{ quizArray[questionIndex].hint }}</p>
+          <p class="explanation" v-if="!isQuizPage">{{
               quizArray[questionIndex].explanation
             }}</p>
         </div>
@@ -62,7 +62,7 @@
                  @mouseover="viewBorder('B')" @mouseleave="viewBorder('B')"/>
           </div>
         </div>
-        <div class="col" v-if="!isQuizPage" :key="questionIndex" style="margin-top: 0">
+        <div class="col my-1" v-if="!isQuizPage" :key="questionIndex" style="margin-top: 0">
           <br>
           <img v-bind:class="{lowOpacity: hoverNextButton }" src="../assets/nextButton.png" @click="nextRound()"
                @mouseover="hoverButton()" @mouseleave="hoverButton()">
@@ -249,5 +249,43 @@ export default {
   width: auto;
   height: auto;
 }
+.hint {
+  color: black;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
+.explanation {
+  color: #3182F7;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.quizNo {
+  color: black;
+  font-family: Pretendard;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+@media (max-width: 992px) {
+  .main1,
+  .main2 {
+    margin-top: 40px;
+  }
+}
+@media (max-width: 450px) {
+  .main1,
+  .main2 {
+    margin-top: 50px;
+  }
+}
 </style>
