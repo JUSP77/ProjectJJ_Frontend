@@ -5,7 +5,7 @@
         <div class="text-center">
           <div class="spinner-container">
             <div class="spinner-border spinner-custom" role="status"></div>
-            <p v-if="whichSpinner='loading'" class="spinner-font">결과 도출 중입니다.</p>
+            <p v-if="whichSpinner='showResult'" class="spinner-font">결과 도출 중입니다.</p>
             <p v-else class="spinner-font"> loading </p>
           </div>
         </div>
