@@ -1,14 +1,8 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="row px-3">
-        <a href="/upload">업로드</a>
-      </div>
-      <br>
-      <div class="row">
-        <h1><strong>UX 라이팅 퀴즈</strong></h1>
-      </div>
-      <div class="row justify-content-center">
+    <div class="row" style="margin-top: 80px;">
+      <p class="title">UX 라이팅 퀴즈</p>
+      <div class="row justify-content-center" style="margin-top: 70px">
         <img class="img-fluid initial-size" src="./../assets/home.png">
       </div>
       <div v-if="isLoading" class="row">
@@ -18,11 +12,12 @@
           </div>
         </div>
       </div>
-      <div class="row v-else">
-        <p>현재 총 {{ count }} 명이 참여했습니다.</p>
+      <div class="row v-else" style="margin-top: 60px">
+        <p class="userCount">총<span style="color: #3182F7">{{ count }}</span>명이 참여했습니다.</p>
       </div>
       <div class="row d-flex justify-content-center">
-        <img class="img-fluid initial-button" v-bind:class="{lowOpacity: hoverNextButton }" src="./../assets/startButton.png" @click="startButton"
+        <img class="img-fluid initial-button" v-bind:class="{lowOpacity: hoverNextButton }"
+             src="./../assets/startButton.png" @click="startButton"
              @mouseover="hoverButton()" @mouseleave="hoverButton()">
       </div>
     </div>
@@ -84,8 +79,28 @@ export default {
   max-width: 656px;
   height: auto;
 }
+
 .initial-button {
   max-width: 275px;
   height: auto;
+}
+
+.title {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: bolder;
+  line-height: normal;
+}
+
+.userCount {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 545;
+  line-height: normal;
 }
 </style>
